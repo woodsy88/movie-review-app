@@ -14,7 +14,8 @@
  *= require_self
  */
 
-
+@import "bootstrap-sprockets";
+@import "bootstrap";
 
 .movie-image-container {
   width: 100px;
