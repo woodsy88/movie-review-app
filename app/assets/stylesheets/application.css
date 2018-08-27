@@ -13,3 +13,9 @@
  *= require_tree .
  *= require_self
  */
+
+
+
+.movie-image-container {
+  width: 100px;
+}
