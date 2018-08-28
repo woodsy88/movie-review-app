@@ -1,23 +1,16 @@
 <div class="container">
 
-  <div class="jumbotron">
-    <h1>Movie Reviews</h1>
-    <p>rank movies for fun</p>
-    <% if !user_signed_in? %>
-      <p><%= link_to 'Sign Up To Write A review', new_user_registration_path, class: "btn btn-primary btn-lg" %></p>
-    <% else %>
-     <%= link_to 'New Movie', new_movie_path, class: 'btn btn-primary' %>
-    <% end %>
-  </div>
+<%= render 'layouts/jumbotron_home' %>
 
-  <div class="row">
+<div class="row">
   <% @movies.each do |movie| %>
-    <div class="col-md-3">
-      <%= movie.title %>
-      <%= link_to (image_tag movie.image.url(:medium), class: 'image'), movie %>
+    <div class="col-sm-6 col-md-3">
+      <div class="thumbnail">
+        <%= link_to (image_tag movie.image.url(:medium), class: 'image'), movie %>
+      </div>
     </div>
   <% end %>
-  </div>
+</div>
 
    
 </div>
