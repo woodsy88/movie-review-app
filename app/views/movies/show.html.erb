@@ -1,7 +1,8 @@
 <div class="panel panel-default">
   <div class="panel-body">
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-6">
+        <%= link_to 'Review This Movie', new_movie_review_path(@movie), class: "btn btn-primary" %>
         <%= image_tag @movie.image.url(:medium) %>
        <div class="table-responsive">
           <table class="table">
@@ -31,9 +32,48 @@
           
         </div>         
       </div>
+      <div class="col-md-6">
+
+<h2>Reviews</h2>
+
+  <% if user_signed_in? %>
+    <% if @movie.user_id == current_user.id  %>
+      <%= link_to 'Edit', edit_movie_path(@movie) %>
+    <% end %>
+  <% end %>
+
+
+  <%= link_to 'Back', movies_path %>  
+
+
+<% if @movie.reviews.blank? %>
+  <p class="small">There are not reviews yet</p>
+    <% if user_signed_in? %>
+      <%= link_to 'Review This Movie', new_movie_review_path(@movie), class: "btn btn-primary" %>
+    <% else %>
+        <p>Login or Signup to review this movie</p>
+          <%= link_to "Sign Up", new_user_registration_path, class: "active" %>
+          <%= link_to "Sign In", new_user_session_path, class: "active" %>
+    <% end %> 
+<% elsif @movie.reviews.any? %>
+    <ul>
+        <% @movie.reviews.each do |review|  %>
+            <li>
+              <%= review.comment %>
+
+              
+              
+              <%= review.user.email %>
+            </li>
+        <% end %>
+    </ul>
+<% end %>      
+      
+      </div>
     </div>
   </div>
+
+  
 </div>
 
-<%= link_to 'Edit', edit_movie_path(@movie) %> |
-<%= link_to 'Back', movies_path %>
+
